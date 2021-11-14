@@ -11,6 +11,8 @@ services:
 
   worker:
     image: locustio/locust
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - ./:/mnt/locust
     command: -f /mnt/locust/locustfile.py --worker --master-host master
