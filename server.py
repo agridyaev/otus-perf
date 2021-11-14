@@ -36,7 +36,7 @@ class Server(BaseHTTPRequestHandler):
         self.wfile.write(self._html("hi!"))
 
 
-def run(server_class=HTTPServer, handler_class=Server, addr="localhost", port=8000):
+def run(server_class=HTTPServer, handler_class=Server, addr="0.0.0.0", port=8000):
     server_address = (addr, port)
     httpd = server_class(server_address, handler_class)
 
@@ -48,7 +48,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-l", "--listen",
-        default="localhost"
+        default="0.0.0.0"
     )
     parser.add_argument(
         "-p", "--port",
