@@ -14,14 +14,9 @@ class Server(BaseHTTPRequestHandler):
         # code = 200 if integer == 1 else 500
         code = 200
 
-        # if code == 500:
-        #     time.sleep(random.randint(1, 2))
-
         # request throttling
-        # Server.total_sleep += 0.1
         # Server.total_sleep += 1
         # time.sleep(Server.total_sleep)
-        # print(f"{Server.total_sleep}")
 
         self.send_response(code)
         self.send_header("Content-type", "text/html")
