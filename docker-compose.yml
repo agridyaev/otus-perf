@@ -7,12 +7,16 @@ services:
      - "8089:8089"
     volumes:
       - ./:/mnt/locust
-    command: -f /mnt/locust/locustfile.py --master -H http://host.docker.internal:8000
+    # Linux: you can use any hostname instead of "host.docker.internal"
+    # MacOS: you have to use "host.docker.internal" because it resolves to host IP
+    command: -f /mnt/locust/locustfile.py --master -H http://myhost:8000 --expect-workers 4 --headless
 
   worker:
     image: locustio/locust
+    # Linux: you have to use extra_hosts to put myhost:<HOST IP> record to /etc/hosts
+    # MacOS: you don't need extra_hosts section
     extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - "myhost:host-gateway"
     volumes:
       - ./:/mnt/locust
     command: -f /mnt/locust/locustfile.py --worker --master-host master
